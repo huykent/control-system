@@ -157,7 +157,7 @@ const SSHKeys = () => {
                                                     <Send size={16} />
                                                 </button>
                                                 <a
-                                                    href={`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api'}/ssh-keys/${key.id}/download`}
+                                                    href={`${import.meta.env.VITE_API_BASE_URL || (window.location.port === '5173' ? 'http://localhost:3000/api' : '/api')}/ssh-keys/${key.id}/download`}
                                                     download
                                                     target="_blank"
                                                     rel="noopener noreferrer"

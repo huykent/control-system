@@ -30,7 +30,13 @@ const Discovery = () => {
     const [uploadKeyData, setUploadKeyData] = useState({ name: '', public_key: '', private_key: '' });
 
     useEffect(() => {
-        const socket = io('http://localhost:3000');
+        const getSocketUrl = () => {
+            if (import.meta.env.VITE_API_BASE_URL) {
+                return import.meta.env.VITE_API_BASE_URL.replace('/api', '');
+            }
+            return window.location.port === '5173' ? 'http://localhost:3000' : '/';
+        };
+        const socket = io(getSocketUrl());
 
         socket.on('discovery:host_updated', (updatedHost) => {
             queryClient.setQueryData(['discovered'], (old) => {

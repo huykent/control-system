@@ -43,7 +43,13 @@ const Terminal = () => {
         fitAddon.fit();
         xtermRef.current = term;
 
-        const socket = io('http://localhost:3000/terminal');
+        const getSocketUrl = () => {
+            if (import.meta.env.VITE_API_BASE_URL) {
+                return import.meta.env.VITE_API_BASE_URL.replace('/api', '/terminal');
+            }
+            return window.location.port === '5173' ? 'http://localhost:3000/terminal' : '/terminal';
+        };
+        const socket = io(getSocketUrl());
         socketRef.current = socket;
 
         socket.on('connect', () => {
