@@ -32,11 +32,8 @@ COPY utils/ ./utils/
 # Copy built frontend from Stage 1
 COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
 
-# Create data directory and non-root user
+# Create data directory
 RUN mkdir -p /app/data
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-RUN chown -R appuser:appgroup /app
-USER appuser
 
 EXPOSE 3000
 
