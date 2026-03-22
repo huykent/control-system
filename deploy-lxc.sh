@@ -44,15 +44,7 @@ else
     cd "$APP_DIR"
 fi
 
-# --- Step 3: Create data directory for SQLite ---
-echo "[3/5] Setting up data directory..."
-mkdir -p "$APP_DIR/data"
-
-# Copy existing database if it exists
-if [ -f "$APP_DIR/database/app.db" ] && [ ! -f "$APP_DIR/data/app.db" ]; then
-    cp "$APP_DIR/database/app.db" "$APP_DIR/data/app.db"
-    echo "  → Copied existing database to data volume"
-fi
+# --- Step 3: Deprecated (Data handled by Docker Named Volume) ---
 
 # --- Step 4: Build and start ---
 echo "[4/5] Building Docker image (this may take a few minutes)..."
