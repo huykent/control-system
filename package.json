@@ -1,0 +1,29 @@
+{
+  "name": "lan-control-system",
+  "version": "1.0.0",
+  "description": "LAN Infrastructure Manager",
+  "author": "Nguyễn Quang Huy (https://www.facebook.com/QuangHuy.Nguyennn/)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "migrate": "node database/migrate.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "bcrypt": "^5.1.1",
+    "compression": "^1.8.1",
+    "cors": "^2.8.5",
+    "dockerode": "^4.0.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "node-cron": "^3.0.3",
+    "node-ssh": "^13.2.0",
+    "socket.io": "^4.7.2",
+    "sqlite3": "^5.1.6",
+    "ssh2": "^1.14.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

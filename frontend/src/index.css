@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    background-color: #030712;
+    color: #f3f4f6;
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Glassmorphism utilities */
+@layer components {
+    .glass-card {
+        @apply bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] rounded-2xl;
+    }
+
+    .glass-card-hover {
+        @apply glass-card transition-all duration-300;
+    }
+
+    .glass-card-hover:hover {
+        @apply bg-white/[0.07] border-white/[0.15] shadow-lg shadow-black/20;
+        transform: translateY(-2px);
+    }
+
+    .glass-sidebar {
+        @apply bg-white/[0.03] backdrop-blur-2xl border-r border-white/[0.06];
+    }
+
+    .glass-navbar {
+        @apply bg-white/[0.03] backdrop-blur-2xl border-b border-white/[0.06];
+    }
+
+    .glow-blue {
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.15), 0 0 60px rgba(59, 130, 246, 0.05);
+    }
+
+    .glow-emerald {
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.15), 0 0 60px rgba(16, 185, 129, 0.05);
+    }
+}
+
+/* Animations */
+.animate-in {
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+}
+
+.fade-in {
+    animation-name: fadeIn;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.animate-slide-up {
+    animation: slideUp 0.5s ease-out both;
+}
+
+.animate-shimmer {
+    background: linear-gradient(90deg, transparent 25%, rgba(255,255,255,0.04) 50%, transparent 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
