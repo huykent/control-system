@@ -2,13 +2,20 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const fs = require('fs');
 
-const dbPath = path.resolve(__dirname, 'lan_control.db');
+// Use environment variable for DB path or default to /app/data/lan_control.db (production) 
+// or local database folder (development)
+const dbDir = process.env.DB_DIR || path.resolve(__dirname);
+if (!fs.existsSync(dbDir)) {
+  fs.mkdirSync(dbDir, { recursive: true });
+}
+
+const dbPath = path.join(dbDir, 'lan_control.db');
 
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
     console.error('Could not connect to database', err);
   } else {
-    console.log('Connected to SQLite database');
+    console.log(`Connected to SQLite database at: ${dbPath}`);
   }
 });
 

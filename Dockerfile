@@ -32,14 +32,16 @@ COPY utils/ ./utils/
 # Copy built frontend from Stage 1
 COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
 
-# Create non-root user
+# Create data directory and non-root user
+RUN mkdir -p /app/data
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 RUN chown -R appuser:appgroup /app
 USER appuser
 
 EXPOSE 3000
 
-HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
     CMD wget -qO- http://localhost:3000/health || exit 1
 
-CMD ["node", "server.js"]
+# Run migration script then start server
+CMD ["sh", "-c", "node database/migrate.js && node server.js"]
