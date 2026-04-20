@@ -40,12 +40,11 @@ class ProxmoxService {
             }
 
             try {
-                const req = await agent.post('/access/ticket', {
-                    username: username,
-                    password: server.password
-                }, {
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-                });
+                const params = new URLSearchParams();
+                params.append('username', username);
+                params.append('password', server.password);
+
+                const req = await agent.post('/access/ticket', params);
 
                 const data = req.data.data;
                 return {
