@@ -44,16 +44,21 @@ class ProxmoxService {
                 params.append('username', username);
                 params.append('password', server.password);
 
+                console.log(`[Proxmox] Authenticating to https://${server.ip}:8006 as ${username}`);
                 const req = await agent.post('/access/ticket', params);
 
                 const data = req.data.data;
+                console.log('[Proxmox] Auth successful, got ticket');
                 return {
                     Cookie: `PVEAuthCookie=${data.ticket}`,
                     CSRFPreventionToken: data.CSRFPreventionToken
                 };
             } catch (err) {
-                console.error('Proxmox auth error:', err.response?.data || err.message);
-                throw new Error('Proxmox authentication failed');
+                console.error(`[Proxmox] Auth FAILED for ${username}@${server.ip}:8006`);
+                console.error('[Proxmox] Status:', err.response?.status);
+                console.error('[Proxmox] Response:', JSON.stringify(err.response?.data || {}));
+                console.error('[Proxmox] Error:', err.code || err.message);
+                throw new Error(`Proxmox authentication failed: ${err.response?.status || err.code || err.message}`);
             }
         }
     }
