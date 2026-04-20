@@ -10,6 +10,9 @@ RUN npm run build
 FROM node:18-alpine AS production
 WORKDIR /app
 
+# Install runtime dependencies for network scanning
+RUN apk add --no-cache arp-scan nmap iproute2
+
 # Install build dependencies for native modules (sqlite3, bcrypt)
 RUN apk add --no-cache python3 make g++
 

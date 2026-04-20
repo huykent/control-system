@@ -4,9 +4,9 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: lan-control
+    network_mode: "host"
     restart: unless-stopped
-    ports:
-      - "3000:3000"
+
     volumes:
       - lan_data:/app/data
     environment:
@@ -28,6 +28,7 @@ services:
   tunnel:
     image: cloudflare/cloudflared:latest
     container_name: lan-control-tunnel
+    network_mode: "host"
     restart: unless-stopped
     command: tunnel --no-autoupdate run --token eyJhIjoiODg0MWI3MmVjOWI3MGFlMWEzZTE5Njk3ODNkYmRiOGIiLCJ0IjoiYTdiYzJlY2QtNzRkNS00ZDg4LTkxNDItYzE3MmJmNTk3NGY4IiwicyI6IllUSXhOR0pqT0dVdE5URXhNaTAwTmpJM0xUazRNVEV0WVdVell6VXlaVGd5WmpnMSJ9
     depends_on:

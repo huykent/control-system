@@ -7,7 +7,7 @@
 set -e
 
 # --- Configuration ---
-REPO_URL="${REPO_URL:-https://github.com/YOUR_USER/control-system.git}"
+REPO_URL="${REPO_URL:-https://github.com/huykent/control-system.git}"
 APP_DIR="/opt/lan-control"
 CONTAINER_NAME="lan-control"
 
